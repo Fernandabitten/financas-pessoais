@@ -1,0 +1,122 @@
+/* Sidebar base */
+.sidebar {
+  background-color: var(--color-secondary);
+  padding: 2rem 0.5rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Título da sidebar */
+.sidebar h2 {
+  color: var(--color-text);
+  margin-top: -2rem;
+}
+
+/* Links de navegação e logo */
+.sidebar nav a,
+.logo {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.6rem;
+  color: var(--color-text-secondary);
+  transition: background-color 0.3s, color 0.3s;
+  text-decoration: none;
+}
+
+.icon-logo {
+  font-size: 40px; /* Ajuste conforme necessário */
+  display: block;
+  margin: 0 auto;
+}
+
+/* Hover e ativo */
+.sidebar nav a.active,
+.sidebar nav a:hover {
+  background-color: var(--color-primary);
+  color: var(--color-text);
+}
+
+/* Texto ao lado da imagem */
+.label {
+  margin: 0.5rem;
+}
+
+/* Imagens na sidebar */
+.sidebar img {
+  width: 2.25rem;
+  height: 2.25rem;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.icon-img {
+  font-size: 24px; /* ou ajuste conforme o necessário */
+}
+
+.img_logo {
+  fill: var(--color-text);
+}
+
+/* Container do menu */
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+ul {
+  gap: 1.5rem;
+}
+
+/* Label visível por padrão */
+.sidebar .label {
+  display: inline;
+}
+
+/* Responsividade */
+
+/* Telas até 800px */
+@media (max-width: 800px) {
+  .sidebar {
+    width: 3.75rem;
+    padding: 2.5rem 0.5rem 1rem;
+    align-items: center;
+  }
+
+  .sidebar .label {
+    display: none;
+  }
+
+  .sidebar h2,
+  .sidebar nav a {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .sidebar .icon-img {
+    margin: 0;
+  }
+}
+
+/* Telas maiores que 800px */
+@media (min-width: 801px) {
+  .sidebar {
+    align-items: flex-start;
+  }
+
+  .sidebar h2,
+  .sidebar nav a {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .sidebar .label {
+    display: inline;
+  }
+}

@@ -1,0 +1,30 @@
+<section class="table" aria-labelledby="tabela-lancamentos-titulo">
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Data</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Categoria</th>
+        <th scope="col">Descrição</th>
+        <th scope="col">Valor</th>
+        <th scope="col" class="col-acao" style="display: none">Ação</th>
+      </tr>
+    </thead>
+
+    <tbody id="lista-lancamentos">
+      <!-- Linhas dinâmicas inseridas via JavaScript -->
+    </tbody>
+
+    <tfoot class="tabela-total" style="display: none">
+      <tr class="linha-separadora">
+        <td colspan="6"></td>
+      </tr>
+      <tr>
+        <td colspan="3"></td>
+        <td><strong>Total</strong></td>
+        <td id="total">0,00</td>
+        <td></td>
+      </tr>
+    </tfoot>
+  </table>
+</section>

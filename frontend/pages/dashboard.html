@@ -1,0 +1,81 @@
+<div>
+  <!-- InfoBar -->
+  <div id="info-bar-placeholder" data-title="Visão Geral"></div>
+
+  <!-- Cards: Contas e Saldo -->
+  <section class="cards">
+    <article class="card red">
+      <p>Contas a pagar</p>
+      <h3><span id="saida">0,00</span></h3>
+      <div class="progress-bar">
+        <div id="barra-saida" class="barra-interna red"></div>
+      </div>
+    </article>
+
+    <article class="card green">
+      <p>Contas a receber</p>
+      <h3><span id="entrada">0,00</span></h3>
+      <div class="progress-bar">
+        <div id="barra-entrada" class="barra-interna green"></div>
+      </div>
+    </article>
+
+    <article class="card">
+      <p>Saldo</p>
+      <h3><span id="saldo">0,00</span></h3>
+    </article>
+  </section>
+  <section class="cards">
+    <article id="card-recomendacao" class="card">
+      <p>Recomendação inteligente aparecerá aqui!</p>
+    </article>
+    <button id="gerar-explicacao" class="btn branco">Insight Financeiro</button>
+  </section>
+
+  <!-- Gráficos -->
+  <section id="charts-container" class="charts">
+    <div class="chart-container">
+      <h4 id="titulo-categorias">Total por categoria</h4>
+      <canvas id="grafico-categorias" height="375"></canvas>
+    </div>
+
+    <div class="chart-container">
+      <h4 id="titulo-periodo">Total por período</h4>
+      <canvas id="grafico-periodo" height="375"></canvas>
+    </div>
+  </section>
+
+  <!-- Mensagem quando não há lançamentos -->
+  <p
+    id="mensagem-vazia"
+    class="mensagem-vazia"
+    style="text-align: center; margin-top: 2rem"
+  >
+    Você não possui lançamentos.
+  </p>
+
+  <!-- Tabela de lançamentos -->
+  <section>
+    <div class="section-table">
+      <h3 id="tabela-lancamentos-titulo">Lançamentos</h3>
+      <button id="baixarLancamentos" class="btn branco">
+        <i class="fa-solid fa-file-csv"></i>
+        Baixar lançamentos
+      </button>
+    </div>
+    <div
+      id="tabela-placeholder"
+      data-acao="false"
+      data-total="false"
+      aria-label="Tabela de lançamentos"
+    ></div>
+  </section>
+
+  <div id="modal-explicacao" class="modal oculto">
+    <div class="modal-conteudo">
+      <span class="modal-fechar" id="fechar-modal">&times;</span>
+      <h2>Pila explica</h2>
+      <div id="conteudo-modal">Carregando explicação...</div>
+    </div>
+  </div>
+</div>

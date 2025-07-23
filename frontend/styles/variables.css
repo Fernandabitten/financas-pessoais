@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap");
+
+:root {
+  --font-main: "Roboto Slab", serif;
+  --font-secondary: "Inter", sans-serif;
+  --font-size: 1.125rem;
+  --spacing-small: 0.5rem;
+  --spacing: 1rem;
+  --spacing-large: 2rem;
+  --border-radius: 8px;
+
+  /* Entradas (tons de verde - sucesso) */
+  --entrada-1: #222918;
+  --entrada-2: #218838;
+  --entrada-3: #89a661;
+  --entrada-4: #455331;
+  --entrada-5: #34d399;
+
+  /* Saídas (tons de vermelho, laranja e roxo - alerta/gastos) */
+  --saida-1: #dc3545;
+  --saida-2: #e55353;
+  --saida-3: #ff6b6b;
+  --saida-4: #ff9f43;
+  --saida-5: #fd7e14;
+  --saida-6: #f8c291;
+  --saida-7: #9b59b6;
+  --saida-8: #c0392b;
+  --saida-9: #e67e22;
+}
+
+/* Tema escuro */
+.theme-dark {
+  --color-primary: #0b0f27;
+  --color-hover: #2a2d56;
+  --color-secondary: #191c3a;
+  --color-background: #0b0f27;
+  --color-text: #f4f4f4;
+  --color-text-secondary: #888;
+  --color-border: #bfbfbf;
+  --color-danger: #ff0e0e;
+  --color-success: #00c851;
+  --color-sucess-hover: rgb(142, 230, 196);
+  --color-action: #007bff;
+  --color-shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* Tema claro */
+.theme-light {
+  --color-primary: #d4e2db;
+  --color-hover: #89a892;
+  --color-secondary: #aec5b6;
+  --color-background: #d4e2db;
+  --color-text: #218838;
+  --color-text-secondary: #455331;
+  --color-border: #bfbfbf;
+  --color-danger: #ff0e0e;
+  --color-success: #00c851;
+  --color-sucess-hover: rgb(142, 230, 196);
+  --color-action: #007bff;
+  --color-shadow: rgba(0, 0, 0, 0.05);
+}

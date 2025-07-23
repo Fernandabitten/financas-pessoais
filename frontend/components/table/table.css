@@ -1,0 +1,68 @@
+.table {
+  padding: 2rem;
+  overflow-x: auto; /* permite scroll horizontal em telas pequenas */
+}
+
+.table table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: var(--color-secondary);
+  border-radius: 8px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.table th,
+.table td {
+  padding: 0.8rem 1rem;
+  text-align: left;
+  color: var(--color-text);
+}
+
+.table th {
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.table tbody tr {
+  border-bottom: 2px solid #bfbfbf;
+  transition: background-color 0.3s ease;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: var(--color-primary);
+}
+
+.table tbody tr:hover {
+  background-color: var(--color-hover);
+  cursor: pointer;
+}
+
+.linha-separadora td {
+  border-top: 0.125px solid var(--color-text);
+  padding: 0;
+  height: 5px;
+}
+/* Responsividade */
+@media (max-width: 600px) {
+  /* Permite rolagem horizontal na tabela para telas pequenas */
+  .table {
+    padding-bottom: 1rem;
+  }
+
+  .table table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* melhor rolagem no iOS */
+  }
+
+  .table th,
+  .table td {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+    white-space: nowrap; /* evita quebra dentro das células */
+  }
+}

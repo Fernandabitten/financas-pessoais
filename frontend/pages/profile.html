@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finanças Pessoais | Perfil do Usuário</title>
+    <link rel="icon" href="../images/logo.png" type="image/png" />
+    <script>
+      const temaSalvo = localStorage.getItem("tema") || "theme-dark";
+      document.documentElement.classList.add(`theme-${temaSalvo}`);
+    </script>
+    <link rel="stylesheet" href="../styles/profile.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="main">
+      <header class="header">
+        <a href="../index.html" class="voltar">← Voltar</a>
+      </header>
+
+      <main class="container">
+        <section class="profile-pic">
+          <div class="avatar" id="avatar">
+            <i class="fas fa-user-edit"></i>
+          </div>
+        </section>
+        <h1>Editar perfil</h1>
+        <p>Para editar nome ou senha, você deve informar sua senha atual</p>
+
+        <form class="form">
+          <input type="text" placeholder="Nome" />
+          <input type="email" placeholder="Email" />
+          <input type="password" placeholder="Senha atual" required />
+          <input type="password" placeholder="Nova senha" />
+          <button type="submit">Salvar</button>
+        </form>
+      </main>
+    </div>
+    <script type="module" src="../scripts/profile.js"></script>
+  </body>
+</html>
