@@ -2,10 +2,10 @@
 
 ![Status](https://img.shields.io/badge/progresso-100%25-green?style=for-the-badge)
 
+![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)
 ![HTML5](https://img.shields.io/badge/HTML5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=000)
 ![Vanilla JS](https://img.shields.io/badge/Vanilla%20JS-F0DB4F?style=for-the-badge&logo=javascript&logoColor=323330)
-
 ![Node.js](https://img.shields.io/badge/Node.js-%2343853D.svg?style=for-the-badge&logo=node.js&logoColor=white)
 ![Express](https://img.shields.io/badge/Express.js-000?style=for-the-badge&logo=express&logoColor=white)
 ![express-session](https://img.shields.io/badge/express--session-ff69b4?style=for-the-badge)
