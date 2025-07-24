@@ -15,7 +15,7 @@
 ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 ![Gemini 2.0 Flash](https://img.shields.io/badge/Gemini%202.0%20Flash-4285F4?style=for-the-badge&logo=google&logoColor=white)
 
-👉 [Acesse o deploy aqui!!](https://financas-pessoais-nu-ten.vercel.app/login.html)
+👉 [Acesse o deploy aqui!!](https://fernandabitten.github.io/financas-pessoais/frontend/)
 
 ## Sobre o projeto
 
@@ -70,10 +70,6 @@ Este projeto foi desenvolvido como **Projeto Final** da disciplina **Desenvolvim
 
   - Geração automática de análise e sugestões financeiras pelo Gemini (Google Generative AI)
   - Resumo de desempenho, dicas práticas e consolidados em JSON por categoria
-
-- ## Designer
-
-  - Prototipação visual original feita no Figma
 
 - ## Design
   - Prototipação visual original feita no **Figma** e serve como guia para a implementação das páginas HTML.  
