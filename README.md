@@ -19,7 +19,7 @@
 
 ## Sobre o projeto
 
-Aplicação full stack para gestão de finanças pessoais, permitindo cadastro e autenticação de usuários, registro e consulta de lançamentos, geração de gráficos, exportação de dados Aplicação full stack para controle de finanças pessoais, permitindo cadastro de usuários, autenticação segura por sessão, lançamentos financeiros, relatórios dinâmicos, exportação de dados e análise automática via inteligência artificial. Inclui modo escuro/claro, edição de perfil e acompanha protótipo original no Figma.
+Aplicação full stack para controle de finanças pessoais, permitindo cadastro de usuários, autenticação segura por sessão, lançamentos financeiros, relatórios dinâmicos, exportação de dados e análise automática via inteligência artificial. Inclui modo escuro/claro, edição de perfil e acompanha protótipo original no Figma.
 
 Este projeto foi desenvolvido como **Projeto Final** da disciplina **Desenvolvimento Web II** do **IFCE**, cujo objetivo é aplicar na prática os conceitos de **requisições HTTP** e **APIs RESTful**, utilizando os métodos **GET**, **POST**, **PUT** e **DELETE** para manipular recursos via uma interface web. **Persistencia dos dados com SQLite, Node.js, autenticação, controle de Sessões e Proteção de Rotas, utilizando bcrypt e express-session**
 
@@ -28,7 +28,9 @@ Este projeto foi desenvolvido como **Projeto Final** da disciplina **Desenvolvim
 - **Frontend**:
   HTML5,
   CSS3,
-  JavaScript (Vanilla)
+  JavaScript (Vanilla),
+  Chart.js,
+  
 - **Backend**:
   Node.js,
   Express.js,
