@@ -12,10 +12,9 @@
 ![bcrypt](https://img.shields.io/badge/bcrypt-4B8BBE?style=for-the-badge)
 ![SQLite](https://img.shields.io/badge/SQLite-07405E.svg?style=for-the-badge&logo=sqlite&logoColor=white)
 ![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=000)
-![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 ![Gemini 2.0 Flash](https://img.shields.io/badge/Gemini%202.0%20Flash-4285F4?style=for-the-badge&logo=google&logoColor=white)
 
-👉 [Acesse o deploy aqui!!](https://fernandabitten.github.io/financas-pessoais/frontend/)
+👉 [Acesse o deploy aqui!!](https://fernandabitten.github.io/financas-pessoais/frontend/login.html)
 
 ## Sobre o projeto
 
