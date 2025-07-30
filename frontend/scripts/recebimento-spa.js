@@ -84,7 +84,12 @@ export async function iniciar() {
 
     let total = 0;
 
-    for (const t of lista) {
+    // Ordenar por data decrescente
+    const transacoesOrdenadas = [...lista].sort((a, b) =>
+      b.data.localeCompare(a.data)
+    );
+
+    for (const t of transacoesOrdenadas) {
       const valor = Number(t.valor);
       total += valor;
 

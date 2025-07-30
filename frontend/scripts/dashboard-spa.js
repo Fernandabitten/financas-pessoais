@@ -313,9 +313,16 @@ function formatarDataISOParaBR(dataISO) {
   const [ano, mes, dia] = dataISO.split("-");
   return `${dia}/${mes}/${ano}`;
 }
+
 function preencherTabela(transacoes, container) {
   container.innerHTML = "";
-  for (const t of transacoes) {
+
+  // Ordenar por data decrescente (mais recente primeiro)
+  const transacoesOrdenadas = [...transacoes].sort((a, b) =>
+    b.data.localeCompare(a.data)
+  );
+
+  for (const t of transacoesOrdenadas) {
     const valor = Number(t.valor);
     const row = document.createElement("tr");
     row.innerHTML = `
