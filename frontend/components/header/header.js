@@ -1,16 +1,29 @@
 import { BASE_API_URL, fetchComErro } from "../../scripts/api.js";
 
+// Lista de temas disponíveis com seus respectivos ícones e nomes
+const themeConfig = {
+  dark: { icon: "fas fa-moon", label: "Tema Escuro" },
+  light: { icon: "fas fa-sun", label: "Tema Claro" },
+  gray: { icon: "fas fa-adjust", label: "Tema Cinza" },
+  blue: { icon: "fas fa-droplet", label: "Tema Azul" },
+  violet: { icon: "fas fa-star-half-alt", label: "Tema Violeta" },
+};
+
+const temasDisponiveis = Object.keys(themeConfig);
+
 const temaSalvo = localStorage.getItem("tema") || "dark";
-document.documentElement.classList.add(`theme-${temaSalvo}`);
+const temaValido = temasDisponiveis.includes(temaSalvo) ? temaSalvo : "dark";
+document.documentElement.classList.add(`theme-${temaValido}`);
 
 export async function ativarHeader(container) {
   // Carrega o CSS uma única vez
   const cssId = "header-css";
   if (!document.getElementById(cssId)) {
-    const link = document.createElement("link");
-    link.id = cssId;
-    link.rel = "stylesheet";
-    link.href = "components/header/header.css";
+    const link = Object.assign(document.createElement("link"), {
+      id: cssId,
+      rel: "stylesheet",
+      href: "components/header/header.css",
+    });
     document.head.appendChild(link);
   }
 
@@ -26,6 +39,8 @@ export async function ativarHeader(container) {
   const logoutBtn = container.querySelector("#logout-btn");
   const saudacaoEl = container.querySelector(".user-area strong");
   const editProfileBtn = document.getElementById("edit-profile-btn");
+  const toggleThemeBtn = container.querySelector("#toggle-theme-btn");
+  const html = document.documentElement;
 
   // Se os elementos essenciais não existem, não continua
   if (!avatar || !userMenu || !logoutBtn || !saudacaoEl) return;
@@ -40,7 +55,7 @@ export async function ativarHeader(container) {
     if (res?.nome) {
       saudacaoEl.textContent = `Olá, ${res.nome}`;
     }
-  } catch (e) {
+  } catch {
     console.warn("Usuário não autenticado ou erro ao buscar dados");
   }
 
@@ -48,7 +63,8 @@ export async function ativarHeader(container) {
   avatar.addEventListener("click", (e) => {
     e.stopPropagation();
     const visivel = userMenu.style.display === "block";
-    userMenu.style.display = visivel ? "none" : "block";
+    userMenu.style.display =
+      userMenu.style.display === "block" ? "none" : "block";
   });
 
   // Fecha menu ao clicar fora
@@ -81,19 +97,17 @@ export async function ativarHeader(container) {
     });
   }
 
-  // Alternância de tema (claro/escuro)
-  const toggleThemeBtn = container.querySelector("#toggle-theme-btn");
-  const html = document.documentElement;
-
+  // Atualiza ícone do botão de tema
   function atualizaIconeTema() {
     if (!toggleThemeBtn) return;
-    if (html.classList.contains("theme-dark")) {
-      toggleThemeBtn.innerHTML =
-        '<i class="fas fa-moon"></i> Alterar Tema <span class="sr-only">Alternar tema</span>';
-    } else {
-      toggleThemeBtn.innerHTML =
-        '<i class="fas fa-sun"></i> Alterar Tema <span class="sr-only">Alternar tema</span>';
-    }
+    const temaAtual = temasDisponiveis.find((t) =>
+      html.classList.contains(`theme-${t}`)
+    );
+    const tema = themeConfig[temaAtual];
+    toggleThemeBtn.innerHTML = `
+      <i class="${tema.icon}"></i> ${tema.label}
+      <span class="sr-only">Alternar tema</span>
+    `;
   }
 
   // Mostra ícone correto ao abrir
@@ -101,12 +115,18 @@ export async function ativarHeader(container) {
 
   if (toggleThemeBtn) {
     toggleThemeBtn.addEventListener("click", () => {
-      const isDark = html.classList.contains("theme-dark");
-      const newTheme = isDark ? "light" : "dark";
+      const temaAtual = temasDisponiveis.find((t) =>
+        html.classList.contains(`theme-${t}`)
+      );
 
-      html.classList.remove(`theme-${isDark ? "dark" : "light"}`);
-      html.classList.add(`theme-${newTheme}`);
-      localStorage.setItem("tema", newTheme);
+      let proximoIndice =
+        (temasDisponiveis.indexOf(temaAtual) + 1) % temasDisponiveis.length;
+      const novoTema = temasDisponiveis[proximoIndice];
+
+      // Atualiza classes e localStorage
+      temasDisponiveis.forEach((t) => html.classList.remove(`theme-${t}`));
+      html.classList.add(`theme-${novoTema}`);
+      localStorage.setItem("tema", novoTema);
 
       atualizaIconeTema();
       document.dispatchEvent(new Event("themechange"));
