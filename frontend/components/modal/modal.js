@@ -80,7 +80,8 @@ export function ativarModal(config) {
       formModal.reset();
       config.onSalvar?.();
     } else {
-      alert("Erro ao salvar.");
+      const erro = await res.json();
+      alert(erro.erro || "Erro ao salvar.");
     }
     return false;
   });
