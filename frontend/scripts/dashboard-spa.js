@@ -84,42 +84,6 @@ async function carregarRecomendacao() {
     console.error("Erro ao recarregar transações:", error);
   }
 
-  // document.getElementById("gerar-explicacao").onclick = async () => {
-  //   const modal = document.getElementById("modal-explicacao");
-  //   const conteudo = document.getElementById("conteudo-modal");
-  //   modal.classList.remove("oculto");
-  //   conteudo.textContent = "Carregando explicação...";
-
-  //   try {
-  //     const res = await fetch(`${BASE_API_URL}/resumo-ia`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       credentials: "include",
-  //       body: JSON.stringify({
-  //         transacoes: ultimoStateDashboard.transacoesMesAno,
-  //         ano: ultimoStateDashboard.anoSelecionado,
-  //         mes:
-  //           ultimoStateDashboard.mesSelecionado === "todos"
-  //             ? null
-  //             : Number(ultimoStateDashboard.mesSelecionado),
-  //       }),
-  //     });
-
-  //     const data = await res.json();
-  //     conteudo.textContent =
-  //       data.resumo?.resumoFinanceiro || "Nenhuma explicação disponível.";
-  //   } catch (e) {
-  //     conteudo.textContent =
-  //       "Não foi possível carregar a explicação no momento.";
-  //     console.error(e);
-  //   }
-  // };
-
-  // document.getElementById("fechar-modal").onclick = () => {
-  //   document.getElementById("modal-explicacao").classList.add("oculto");
-  // };
   document.getElementById("gerar-explicacao").onclick = async () => {
     const modal = document.getElementById("modal-explicacao");
     const conteudo = document.getElementById("conteudo-modal");
@@ -236,10 +200,22 @@ function renderizarDashboard(params) {
     });
   }
 
+  const secaoRecomendacao = document.querySelector(
+    "section.cards .card#card-recomendacao"
+  )?.parentElement; // pega a <section class="cards"> que contém o card e o botão
+  const tabelaSection = document.querySelector(
+    "section .section-table"
+  )?.parentElement; // pega <section> da tabela
+
   if (!temLancamentos) {
     if (chartCategorias) chartCategorias.destroy();
     if (chartPeriodo) chartPeriodo.destroy();
+    if (secaoRecomendacao) secaoRecomendacao.classList.add("oculto");
+    if (tabelaSection) tabelaSection.classList.add("oculto");
     return;
+  } else {
+    if (secaoRecomendacao) secaoRecomendacao.classList.remove("oculto");
+    if (tabelaSection) tabelaSection.classList.remove("oculto");
   }
 
   atualizarTitulosGraficos(
