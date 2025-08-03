@@ -1,40 +1,49 @@
 const db = require("../db");
 
-exports.createUser = (nome, email, senha) => {
-  const stmt = db.prepare(
-    `INSERT INTO users (nome, email, senha) VALUES (?, ?, ?)`
+exports.createUser = async (nome, email, senha) => {
+  const result = await db.query(
+    `INSERT INTO users (nome, email, senha) VALUES ($1, $2, $3) RETURNING id`,
+    [nome, email, senha]
   );
-  const result = stmt.run(nome, email, senha);
-  return { id: result.lastInsertRowid };
+  return { id: result.rows[0].id };
 };
 
-exports.findUserByEmail = (email) => {
-  const stmt = db.prepare(`SELECT * FROM users WHERE email = ?`);
-  return stmt.get(email);
+exports.findUserByEmail = async (email) => {
+  const result = await db.query(`SELECT * FROM users WHERE email = $1`, [
+    email,
+  ]);
+  return result.rows[0] || null;
 };
 
-exports.getUserById = (id) => {
-  const stmt = db.prepare(`SELECT id, nome, email FROM users WHERE id = ?`);
-  return stmt.get(id);
+exports.getUserById = async (id) => {
+  const result = await db.query(
+    `SELECT id, nome, email FROM users WHERE id = $1`,
+    [id]
+  );
+  return result.rows[0] || null;
 };
 
-exports.getUserWithSenha = (id) => {
-  const stmt = db.prepare(`SELECT * FROM users WHERE id = ?`);
-  return stmt.get(id);
+exports.getUserWithSenha = async (id) => {
+  const result = await db.query(`SELECT * FROM users WHERE id = $1`, [id]);
+  return result.rows[0] || null;
 };
 
-exports.updateUser = (id, campos) => {
+exports.updateUser = async (id, campos) => {
   const updates = [];
   const valores = [];
+  let index = 1;
 
   for (const chave in campos) {
-    updates.push(`${chave} = ?`);
+    updates.push(`${chave} = $${index}`);
     valores.push(campos[chave]);
+    index++;
   }
 
-  const sql = `UPDATE users SET ${updates.join(", ")} WHERE id = ?`;
-  valores.push(id);
+  valores.push(id); // último valor para o WHERE
 
-  const stmt = db.prepare(sql);
-  return stmt.run(...valores);
+  const sql = `UPDATE users SET ${updates.join(
+    ", "
+  )} WHERE id = $${index} RETURNING *`;
+  const result = await db.query(sql, valores);
+  return result.rows[0] || null;
 };

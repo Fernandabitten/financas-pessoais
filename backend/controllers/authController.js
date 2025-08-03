@@ -1,17 +1,17 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/userModel");
 
-exports.register = (req, res) => {
+exports.register = async (req, res) => {
   const { nome, email, senha } = req.body;
 
   try {
-    const usuarioExistente = User.findUserByEmail(email);
+    const usuarioExistente = await User.findUserByEmail(email);
     if (usuarioExistente) {
       return res.status(400).json({ erro: "Email já cadastrado." });
     }
 
     const hash = bcrypt.hashSync(senha, 10);
-    const { id: userId } = User.createUser(nome, email, hash);
+    const { id: userId } = await User.createUser(nome, email, hash);
     req.session.userId = userId;
 
     res.status(201).json({ id: userId });
@@ -21,11 +21,11 @@ exports.register = (req, res) => {
   }
 };
 
-exports.login = (req, res) => {
+exports.login = async (req, res) => {
   const { email, senha } = req.body;
 
   try {
-    const user = User.findUserByEmail(email);
+    const user = await User.findUserByEmail(email);
     if (!user) {
       return res.status(401).json({ erro: "Credenciais inválidas" });
     }
@@ -49,12 +49,12 @@ exports.logout = (req, res) => {
   });
 };
 
-exports.getUser = (req, res) => {
+exports.getUser = async (req, res) => {
   const userId = req.session.userId;
   if (!userId) return res.status(401).json({ erro: "Não autenticado" });
 
   try {
-    const user = User.getUserById(userId);
+    const user = await User.getUserById(userId);
     if (!user) return res.status(404).json({ erro: "Usuário não encontrado" });
 
     res.json(user); // { id, nome, email }
@@ -64,7 +64,7 @@ exports.getUser = (req, res) => {
   }
 };
 
-exports.atualizarPerfil = (req, res) => {
+exports.atualizarPerfil = async (req, res) => {
   const userId = req.session.userId;
   const { nome, senhaAtual, novaSenha } = req.body;
 
@@ -73,7 +73,7 @@ exports.atualizarPerfil = (req, res) => {
     return res.status(400).json({ erro: "Senha atual é obrigatória" });
 
   try {
-    const user = User.getUserWithSenha(userId);
+    const user = await User.getUserWithSenha(userId);
     if (!user) return res.status(404).json({ erro: "Usuário não encontrado" });
 
     const senhaValida = bcrypt.compareSync(senhaAtual, user.senha);
@@ -89,7 +89,7 @@ exports.atualizarPerfil = (req, res) => {
       return res.status(400).json({ erro: "Nenhuma alteração enviada" });
     }
 
-    User.updateUser(userId, atualizacoes);
+    await User.updateUser(userId, atualizacoes);
     res.json({ mensagem: "Perfil atualizado com sucesso" });
   } catch (err) {
     console.error(err);

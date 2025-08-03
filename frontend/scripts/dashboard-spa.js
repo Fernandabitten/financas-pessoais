@@ -285,10 +285,6 @@ function capitalize(texto) {
     .toLowerCase()
     .replace(/(?:^|\s|[-/()])[a-z]/g, (m) => m.toUpperCase());
 }
-function formatarDataISOParaBR(dataISO) {
-  const [ano, mes, dia] = dataISO.split("-");
-  return `${dia}/${mes}/${ano}`;
-}
 
 function preencherTabela(transacoes, container) {
   container.innerHTML = "";
@@ -299,10 +295,15 @@ function preencherTabela(transacoes, container) {
   );
 
   for (const t of transacoesOrdenadas) {
+    const dataFormatada = (() => {
+      const dateObj = new Date(t.data);
+      return dateObj.toLocaleDateString("pt-BR");
+    })();
+
     const valor = Number(t.valor);
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td>${formatarDataISOParaBR(t.data)}</td>
+       <td>${dataFormatada}</td>
       <td>${capitalize(t.tipo)}</td>
       <td>${capitalize(t.categoria)}</td>
       <td>${capitalize(t.descricao || "")}</td>

@@ -1,10 +1,10 @@
 const Transaction = require("../models/transation");
 
-exports.listar = (req, res) => {
+exports.listar = async (req, res) => {
   const userId = req.session.userId;
 
   try {
-    const rows = Transaction.getTransactionsByUser(userId);
+    const rows = await Transaction.getTransactionsByUser(userId);
     res.json(rows);
   } catch (err) {
     console.error("Erro ao buscar transações:", err);
@@ -12,7 +12,7 @@ exports.listar = (req, res) => {
   }
 };
 
-exports.criar = (req, res) => {
+exports.criar = async (req, res) => {
   const userId = req.session.userId;
   const { tipo, valor, categoria, descricao, data } = req.body;
 
@@ -24,7 +24,7 @@ exports.criar = (req, res) => {
   }
 
   try {
-    const id = Transaction.createTransaction(
+    const id = await Transaction.createTransaction(
       userId,
       tipo,
       valor,
@@ -39,7 +39,7 @@ exports.criar = (req, res) => {
   }
 };
 
-exports.atualizar = (req, res) => {
+exports.atualizar = async (req, res) => {
   const { id } = req.params;
   const userId = req.session.userId;
   const { tipo, valor, categoria, descricao, data } = req.body;
@@ -52,7 +52,7 @@ exports.atualizar = (req, res) => {
   }
 
   try {
-    const result = Transaction.upDateTransation(
+    const result = await Transaction.upDateTransation(
       userId,
       tipo,
       valor,
@@ -61,21 +61,28 @@ exports.atualizar = (req, res) => {
       data,
       id
     );
-    res.status(200).json({ changes: result.changes });
+
+    if (!result) {
+      return res
+        .status(404)
+        .json({ erro: "Transação não encontrada ou não pertence ao usuário" });
+    }
+
+    res.status(200).json({ mensagem: "Transação atualizada com sucesso" });
   } catch (err) {
     console.error("Erro ao atualizar transação:", err);
     res.status(500).json({ erro: "Erro ao atualizar transação" });
   }
 };
 
-exports.deletar = (req, res) => {
+exports.deletar = async (req, res) => {
   const id = req.params.id;
   const userId = req.session.userId;
 
   try {
-    const result = Transaction.deleteTransation(id, userId);
+    const result = await Transaction.deleteTransation(id, userId);
 
-    if (result.changes === 0) {
+    if (!result) {
       return res.status(404).json({
         erro: "Transação não encontrada ou não pertence ao usuário",
       });
@@ -88,19 +95,19 @@ exports.deletar = (req, res) => {
   }
 };
 
-const db = require("../db");
-
-exports.baixarLancamentos = (req, res) => {
+exports.baixarLancamentos = async (req, res) => {
   const userId = req.session.userId;
 
   try {
-    const rows = Transaction.getTransactionsByUser(userId);
+    const rows = await Transaction.getTransactionsByUser(userId);
     // Ordenar por data (decrescente)
     const ordenado = rows.sort((a, b) => new Date(b.data) - new Date(a.data));
 
-    let csv = "ID; Data; Tipo; Categoria; Descrição;Valor\n";
-    rows.forEach((row) => {
-      csv += `${row.id};${row.data};"${row.tipo}";"${row.categoria}";"${row.descricao}";${row.valor}\n`;
+    let csv = "ID; Data; Tipo; Categoria; Descrição; Valor\n";
+    ordenado.forEach((row) => {
+      csv += `${row.id};${row.data};"${row.tipo}";"${row.categoria}";"${
+        row.descricao || ""
+      }";${row.valor}\n`;
     });
 
     // Adiciona BOM (Byte Order Mark) para UTF-8
@@ -113,7 +120,6 @@ exports.baixarLancamentos = (req, res) => {
     );
     res.setHeader("Content-Type", "text/csv; charset=utf-8");
     res.send(csvComBOM);
-    //res.json(rows);
   } catch (err) {
     console.error("Erro ao buscar transações:", err);
     res.status(500).json({ erro: "Erro ao buscar transações" });

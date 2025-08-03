@@ -94,9 +94,10 @@ export async function iniciar() {
       total += valor;
 
       const dataFormatada = (() => {
-        const [ano, mes, dia] = t.data.split("-");
-        return `${dia}/${mes}/${ano}`;
+        const dateObj = new Date(t.data);
+        return dateObj.toLocaleDateString("pt-BR");
       })();
+
       const row = document.createElement("tr");
       row.innerHTML = `
           <td>${dataFormatada}</td>
@@ -170,7 +171,7 @@ export async function iniciar() {
   function preencherModal(t) {
     const modalRoot = document.getElementById("modal-placeholder");
     modalRoot.querySelector("#modal-id").value = t.id;
-    modalRoot.querySelector("#modal-data").value = t.data;
+    modalRoot.querySelector("#modal-data").value = t.data.split("T")[0];
     modalRoot.querySelector("#modal-tipo").value = t.tipo;
     atualizarCategoriasPorTipo(t.tipo);
     modalRoot.querySelector("#modal-categoria").value = t.categoria;

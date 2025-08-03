@@ -10,7 +10,8 @@
 ![Express](https://img.shields.io/badge/Express.js-000?&logo=express&logoColor=white)
 ![express-session](https://img.shields.io/badge/express--session-ff69b4?)
 ![bcrypt](https://img.shields.io/badge/bcrypt-4B8BBE?)
-![SQLite](https://img.shields.io/badge/SQLite-07405E.svg?&logo=sqlite&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?logo=postgresql&logoColor=white)
+![Aiven](https://img.shields.io/badge/Aiven-cloud?logo=aiven&logoColor=white&color=E40046)
 ![Render](https://img.shields.io/badge/Render-46E3B7?&logo=render&logoColor=000)
 ![Gemini 2.0 Flash](https://img.shields.io/badge/Gemini%202.0%20Flash-4285F4?&logo=google&logoColor=white)
 
@@ -29,17 +30,17 @@ Este projeto foi desenvolvido como **Projeto Final** da disciplina **Desenvolvim
   CSS3,
   JavaScript (Vanilla),
   Chart.js,
-  
 - **Backend**:
   Node.js,
   Express.js,
-  SQLite (armazenamento local de dados),
+  PostgreSQL (Aiven),
   bcrypt (hash de senhas),
   express-session (gerenciamento de sessões),
   dotenv (variáveis de ambiente)
 - **Hospedagem**:
   - Frontend: GitHub Pages
   - Backend: Render
+  - Banco de dados: Aiven (PostgreSQL)
 
 ---
 
@@ -100,7 +101,7 @@ financas-pessoais/
 │   │   └── aiServiceRoutes.js              # Rotas para resumos IA
 │   ├── services/
 │   │   └── aiService.js                    # Serviço de integração IA
-│   ├── banco.db                            # Banco SQLite (users, transactions)
+│   ├── db.js                               # Conexão e inicialização do banco
 │   ├── .env                                # Variáveis ambiente
 │   ├── .env.exemplo                        #  Exemplo de variáveis de ambiente necessárias para rodar a aplicação. Preencha com seus próprios valores e renomeie para .env
 │   ├── server.js                           # Inicialização do servidor Node.js
@@ -143,10 +144,19 @@ cd financas-pessoais
 - Crie o arquivo .env no backend e preencha:
 
 ```
-  NODE_ENV=development # Troque para production para produção
-  SESSION_SECRET=sua_chave_secreta # Segredo utilizado para sessões
+  NODE_ENV=development                # Troque para production para produção
+  SESSION_SECRET=sua_chave_secreta    # Segredo utilizado para sessões
   GEMINI_API_KEY=sua_chave_api_gemini # Chave API Gemini para integração IA
+
+  # Configuração do banco PostgreSQL (Aiven)
+  DB_HOST=sua_url_do_postgresql       # ex: pg-xxxx.aivencloud.com
+  DB_PORT=5432                        # Porta padrão do PostgreSQL (ajuste se diferente)
+  DB_USER=seu_usuario
+  DB_PASSWORD=sua_senha
+  DB_NAME=nome_do_banco
 ```
+
+> O backend utiliza PostgreSQL (hospedado na Aiven). Preencha as variáveis acima com os dados do banco fornecidos pela plataforma
 
 3. Instale as dependências do backend
 
